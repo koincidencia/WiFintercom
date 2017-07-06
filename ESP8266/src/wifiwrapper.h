@@ -1,4 +1,4 @@
-#ifndef  WIFIWRAPPER_H
+#ifndef WIFIWRAPPER_H
 #define WIFIWRAPPER_H
 
 #include <ESP8266WiFi.h>
