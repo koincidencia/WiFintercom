@@ -10,8 +10,7 @@ private:
   const int BUTTON_PIN = 14;
   const int HOOK_PIN = 12;
   const float BUTTON_RELEASE_TIMEOUT = 1000;
-  const float HOOK_DELAY = 2000;
-  Ticker gateCloserTicker;
+  const float HOOK_DELAY = 1500;
   PushButton *button;
   PushButton *hook;
 
@@ -19,7 +18,6 @@ public:
   Gate();
   ~Gate();
   void OpenTheGate();
-  void CloseTheGate();
 };
 
 #endif /* end of include guard: GATE_H */

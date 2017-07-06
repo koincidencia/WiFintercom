@@ -10,4 +10,7 @@ WiFi enabled [Fermax LOFT telephone](http://www.fermax.com/uk/pro/products/FM-6-
   - Skip this part :D
 - Hangup
   - also needed to open the gate...
-  - desoltering the switch to reverse engineer
+  - desoldering the switch to reverse engineer
+  - after that a small piece of solder dropped on a PLL IC
+  - the IC and the PCB is finally dead :(
+  - but we had another phone!
