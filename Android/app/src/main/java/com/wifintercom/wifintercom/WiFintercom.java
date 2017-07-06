@@ -1,6 +1,7 @@
 package com.wifintercom.wifintercom;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -31,12 +32,14 @@ public class WiFintercom implements Serializable {
 
     public String GetHostname(){return hostname;}
 
-    public void OpenTheGate(final String passwd, Context context){
+    public void OpenTheGate(final String passwd, final Context context){
         StringRequest postRequest = new StringRequest(Request.Method.POST, urlOpenTheGate,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        String parts[] = response.split("<br>");
+                        Toast toast = Toast.makeText(context, parts[0], Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 },
                 new Response.ErrorListener() {
