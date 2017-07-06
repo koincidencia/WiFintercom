@@ -2,7 +2,7 @@
 
 WiFiWrapper::WiFiWrapper()
 {
-  
+
 }
 
 void WiFiWrapper::ConnectToAP(String ssid, String passwd)
@@ -26,4 +26,10 @@ void WiFiWrapper::ConnectToAP(String ssid, String passwd)
 	Serial.println(ssid);
 	Serial.print("IP address: ");
 	Serial.println(WiFi.localIP());
+}
+
+String WiFiWrapper::GetRSSI()
+{
+  String rssi(WiFi.RSSI());
+  return rssi;
 }

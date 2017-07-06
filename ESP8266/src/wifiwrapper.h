@@ -10,6 +10,7 @@ private:
 
 public:
   void ConnectToAP(String ssid, String passwd);
+  String GetRSSI();
   WiFiWrapper();
 };
 
