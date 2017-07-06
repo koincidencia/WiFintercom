@@ -8,3 +8,6 @@ WiFi enabled [Fermax LOFT telephone](http://www.fermax.com/uk/pro/products/FM-6-
   - https://github.com/esp8266/Arduino/issues/1032
   - https://www.hallgeirholien.no/post/esp8266-eap/
   - Skip this part :D
+- Hangup
+  - also needed to open the gate...
+  - desoltering the switch to reverse engineer
