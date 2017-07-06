@@ -10,7 +10,6 @@
 #define PASSWD_ID           "passwd"
 #define PASSWD_ADDR         0
 #define PASSWD_ACCEPT_PIN   0
-#define LED_PIN             2
 #define BROADCAST_PORT      2390
 #define HOSTNAME            "TOTORO"
 
@@ -34,9 +33,7 @@ void OpenTheGateCallback()
         Serial.println("Invalid password");
         msg += "Invalid password<br>";
       } else {
-        digitalWrite(LED_PIN, LOW);
         gate->OpenTheGate();
-        digitalWrite(LED_PIN, HIGH);
         msg = "Opening the gate!<br>";
       }
     }
@@ -80,8 +77,6 @@ void setup()
 
   // Passwd reset pin init
   pinMode(PASSWD_ACCEPT_PIN, INPUT_PULLUP);
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
 
   // Creating a gate
   gate = new Gate();

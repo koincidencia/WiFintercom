@@ -49,7 +49,6 @@ public class WiFintercom implements Serializable {
             @Override
             protected Map<String, String> getParams()
             {
-
                 Map<String, String>  params = new HashMap<>();
                 // the POST parameters:
                 params.put("passwd", passwd);

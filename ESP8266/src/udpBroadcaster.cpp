@@ -8,8 +8,7 @@ UDPBroadcaster::UDPBroadcaster(int port)
 void UDPBroadcaster::BroadcastHandler(String hostname)
 {
 	int packetSize = udp.parsePacket();
-	if(packetSize)
-	{
+	if(packetSize) {
 		Serial.print("Received packet of size ");
 		Serial.println(packetSize);
 		Serial.print("From ");
