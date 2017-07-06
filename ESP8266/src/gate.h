@@ -9,8 +9,9 @@ class Gate {
 private:
   const int BUTTON_PIN = 14;
   const int HOOK_PIN = 12;
-  const float CLOSE_TIMOUT = 1;
-  Ticker gateClosingTicker;
+  const float BUTTON_RELEASE_TIMEOUT = 1000;
+  const float HOOK_DELAY = 2000;
+  Ticker gateCloserTicker;
   PushButton *button;
   PushButton *hook;
 

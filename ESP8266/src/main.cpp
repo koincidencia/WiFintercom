@@ -12,14 +12,14 @@ static Gate *gate;
 void OpenTheGateCallback()
 {
     Serial.println(OPEN_THE_GATE_URL);
+    // Open the gate
+    gate->OpenTheGate();
     // Send HTTP response
     String msg;
     msg = "Opening the gate!<br>";
     msg += "RSSI: " + wifi.GetRSSI() + "<br>";
     msg += "Uptime: " + String(millis()) + "ms<br>";
     httpServer->send(200, "text/html", msg);
-    // Open the gate
-    gate->OpenTheGate();
 }
 
 void setup()
