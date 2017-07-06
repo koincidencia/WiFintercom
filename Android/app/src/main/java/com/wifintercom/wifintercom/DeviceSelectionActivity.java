@@ -40,6 +40,7 @@ public class DeviceSelectionActivity extends AppCompatActivity {
     protected Thread listeningThread;
 
     private ListView lv;
+    private WiFintercom intercom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,9 @@ public class DeviceSelectionActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Get password from user
-                getPasswordDialog();
+                // Send socket data
+                intercom = new WiFintercom(deviceInetAddrs.elementAt(i), deviceHostnames.get(i));
+                intercom.OpenTheGate("Jelszo123", getApplicationContext());
                 /*
                 RGBCtrler rgbCtrler = new RGBCtrler(deviceInetAddrs.elementAt(i), deviceHostnames.get(i));
                 Intent intent = new Intent(DeviceSelectionActivity.this, ColorPickingActivity.class);
@@ -170,7 +172,8 @@ public class DeviceSelectionActivity extends AppCompatActivity {
     protected void getPasswordDialog() {
         final EditText input = new EditText(this);
         input.setHint("Password");
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setInputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("WiFintercom password");
@@ -180,7 +183,7 @@ public class DeviceSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String passwd =  input.getText().toString();
-                finish();
+                // Do smthing with the passwd
                 dialog.dismiss();
             }
         });
