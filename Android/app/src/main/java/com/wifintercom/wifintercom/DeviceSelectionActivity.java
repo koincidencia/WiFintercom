@@ -27,6 +27,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -118,9 +119,12 @@ public class DeviceSelectionActivity extends AppCompatActivity {
                                     public void run() {
                                         try {
                                             InetAddress addr = InetAddress.getByName(strArr[1]);    //get ipaddr
-                                            deviceInetAddrs.add(addr);
-                                            deviceHostnames.add(strArr[2]);
-                                            arrayAdapter.notifyDataSetChanged();
+                                            // Check if it is already in the list
+                                            if (deviceInetAddrs.indexOf(addr) < 0) {
+                                                deviceInetAddrs.add(addr);
+                                                deviceHostnames.add(strArr[2]);
+                                                arrayAdapter.notifyDataSetChanged();
+                                            }
                                         }catch(IOException ex) {
                                             Log.i(TAG, "Oops " + ex.getMessage());
                                         }
@@ -187,12 +191,14 @@ public class DeviceSelectionActivity extends AppCompatActivity {
     class DiscoveryTask extends TimerTask {
         @Override
         public void run() {
+            /*
             runOnUiThread(new Runnable() {
                               @Override
                               public void run() {
                                   clearList();
                               }
                           });
+                          */
             sendBroadcast(String.valueOf(PORT_RECEIVE));
         }
     }
