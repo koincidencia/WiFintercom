@@ -3,17 +3,21 @@
 #include "wifiwrapper.h"
 #include "gate.h"
 #include "passwd.h"
+#include "udpBroadcaster.h"
 
 #define OPEN_THE_GATE_URL "/openthegatebitch"
 #define SET_PASSWD_URL    "/setpasswd"
 #define PASSWD_ID           "passwd"
 #define PASSWD_ADDR         0
 #define PASSWD_ACCEPT_PIN   0
+#define BROADCAST_PORT      2390
+#define HOSTNAME            "TOTORO"
 
 static WiFiWrapper wifi;
 static ESP8266WebServer *httpServer;
 static Gate *gate;
 static Passwd *passwd;
+static UDPBroadcaster *broadcaster;
 
 void OpenTheGateCallback()
 {
@@ -87,6 +91,9 @@ void setup()
   httpServer->begin();
   Serial.println("httpServer started");
 
+  // Initialize broadcaster
+  broadcaster = new UDPBroadcaster(BROADCAST_PORT);
+
   // Init done
   Serial.println("Initialization done");
 }
@@ -95,6 +102,7 @@ void loop()
 {
   while (1) {
     httpServer->handleClient();
+    broadcaster->BroadcastHandler(HOSTNAME);
     if (digitalRead(PASSWD_ACCEPT_PIN) == LOW) {
         passwd->DisableWriteProtection();
         delay(1000);
