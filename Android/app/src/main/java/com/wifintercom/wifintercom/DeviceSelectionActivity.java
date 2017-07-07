@@ -1,6 +1,8 @@
 package com.wifintercom.wifintercom;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.StrictMode;
@@ -9,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -61,9 +65,14 @@ public class DeviceSelectionActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Get password
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                String passwd = sharedPref.getString(getString(R.string.passwd_id), "");
+
                 // Send socket data
                 intercom = new WiFintercom(deviceInetAddrs.elementAt(i), deviceHostnames.get(i));
-                intercom.OpenTheGate("Jelszo123", getApplicationContext());
+                intercom.OpenTheGate(passwd, getApplicationContext());
+
                 /*
                 RGBCtrler rgbCtrler = new RGBCtrler(deviceInetAddrs.elementAt(i), deviceHostnames.get(i));
                 Intent intent = new Intent(DeviceSelectionActivity.this, ColorPickingActivity.class);
@@ -154,6 +163,13 @@ public class DeviceSelectionActivity extends AppCompatActivity {
         discoveryTimer.cancel();
         discoveryTimer.purge();
         super.onStop();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     class DiscoveryTask extends TimerTask {
