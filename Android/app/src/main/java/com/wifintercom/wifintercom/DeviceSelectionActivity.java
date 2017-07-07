@@ -2,6 +2,7 @@ package com.wifintercom.wifintercom;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
@@ -13,6 +14,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -172,6 +174,16 @@ public class DeviceSelectionActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.set_passwd:
+                getPasswordDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     class DiscoveryTask extends TimerTask {
         @Override
         public void run() {
@@ -199,7 +211,10 @@ public class DeviceSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String passwd =  input.getText().toString();
-                // Do smthing with the passwd
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.passwd_id), passwd);
+                editor.commit();
                 dialog.dismiss();
             }
         });
