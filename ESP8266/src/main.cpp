@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include "wifiwrapper.h"
 #include "gate.h"
 #include "passwd.h"
@@ -82,7 +83,15 @@ void setup()
   gate = new Gate();
 
   // Connect to WiFi network
-  wifi.ConnectToAP("A66 Guest", "Hello123");
+  wifi.ConnectToAP("A66 Office", "szabolcs.vereb", "");
+
+  // Set up mDNS responder
+  if (!MDNS.begin("wifintercom")) {
+    Serial.println("Error setting up MDNS responder! Rebooting...");
+		delay(1000);
+		ESP.restart();
+  }
+  Serial.println("mDNS responder started");
 
   // Start the http server
   httpServer = new ESP8266WebServer(80);
@@ -93,6 +102,9 @@ void setup()
 
   // Initialize broadcaster
   broadcaster = new UDPBroadcaster(BROADCAST_PORT);
+
+  // Add mDNS service
+  MDNS.addService("http", "tcp", 80);
 
   // Init done
   Serial.println("Initialization done");
