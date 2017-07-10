@@ -4,7 +4,6 @@
 #include "gate.h"
 #include "passwd.h"
 #include "udpBroadcaster.h"
-#include "wpa2_enterprise.h"
 
 #define OPEN_THE_GATE_URL "/openthegatebitch"
 #define SET_PASSWD_URL    "/setpasswd"
@@ -83,7 +82,8 @@ void setup()
   gate = new Gate();
 
   // Connect to WiFi network
-  wifi.ConnectToAP("A66 Guest", "Hello123");
+  wifi.ScanNetworks();
+  wifi.ConnectToAP("A66 Office", "szabolcs.vereb", "gg76QU2c4Wqt");
 
   // Start the http server
   httpServer = new ESP8266WebServer(80);
