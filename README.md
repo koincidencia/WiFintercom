@@ -8,6 +8,15 @@ WiFi enabled [Fermax LOFT telephone](http://www.fermax.com/uk/pro/products/FM-6-
   - https://github.com/esp8266/Arduino/issues/1032
   - https://www.hallgeirholien.no/post/esp8266-eap/
   - Skip this part :D
+  - solution
+  ```
+    [env:esp12e]
+    platform = espressif8266_stage
+    board = esp12e
+    framework = arduino
+    board_f_flash = 80000000L
+    upload_speed = 921600
+    ```
 - Hangup
   - also needed to open the gate...
   - desoldering the switch to reverse engineer

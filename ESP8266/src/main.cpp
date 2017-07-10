@@ -4,6 +4,7 @@
 #include "gate.h"
 #include "passwd.h"
 #include "udpBroadcaster.h"
+#include "wpa2_enterprise.h"
 
 #define OPEN_THE_GATE_URL "/openthegatebitch"
 #define SET_PASSWD_URL    "/setpasswd"
