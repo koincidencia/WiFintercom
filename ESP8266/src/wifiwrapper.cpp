@@ -78,7 +78,7 @@ void WiFiWrapper::ConnectToAP(String ssid, String usrname, String passwd)
   Serial.println();
   Serial.println("Waiting for connection and IP Address from DHCP");
   while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
+    delay(1000);
     Serial.print(".");
   }
 
